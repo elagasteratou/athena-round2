@@ -9,10 +9,12 @@ const first = {
   background: '#40A080',
   borderRadius: '0px 30px 30px 0px',
   textAlign: 'right',
+  marginLeft: '-10px',
 };
 const second = {
   width: '256px',
   height: '56px',
+  marginLeft: '-10px',
   top: '258px',
   background: ' #C0C08080',
   borderRadius: '0px 30px 30px 0px',
@@ -55,14 +57,13 @@ function RatingResult({ data }) {
           the least
         </h3>
         <div style={third}></div>
-        <span>You can save</span>
-        <span>£121</span>
-        <span>through retrofitting</span>
+        <h3>You can save</h3>
+        <h3>£121</h3>
+        <h3>through retrofitting</h3>
       </div>
-      <Button
-        variant="contained"
-      >
-Let’s retrofit to bump up your rating!</Button>
+      <Button variant="contained">
+        Let’s retrofit to bump up your rating!
+      </Button>
     </>
   );
 }
