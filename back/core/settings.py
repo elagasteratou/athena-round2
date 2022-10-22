@@ -19,13 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME", "dbname"),
-        "USER": os.environ.get("DB_USER", "dbuser"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "dbpassword"),
-        "HOST": os.environ.get("DB_HOST", "postgres"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -45,6 +41,8 @@ INSTALLED_APPS = [
     # Our Apps
     "core",
     "accounts",
+    "home",
+    "appliances",
 ]
 
 MIDDLEWARE = [

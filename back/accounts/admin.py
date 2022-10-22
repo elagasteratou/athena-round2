@@ -12,7 +12,6 @@ class CustomUserAdmin(UserAdmin):
         "first_name",
         "last_name",
         "is_staff",
-        "email_verified",
     )
     list_filter = ("is_staff",)
     fieldsets = (

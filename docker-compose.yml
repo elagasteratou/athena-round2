@@ -1,17 +1,18 @@
 version: '3.5'
-
 services:
-  postgres:
-    container_name: postgres
-    image: postgres:11.6
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
+  db:
+    image: mysql:latest
     volumes:
-      - ~/srv/docker/template-postgres/data:/var/lib/postgresql/data:rw
+      - ./db:/var/lib/mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_PASSWORD: mypassword
+      MYSQL_DATABASE: django
+    expose:
+      - "3306"
 
   django:
     container_name: django
@@ -24,7 +25,7 @@ services:
     volumes:
       - ./back:/app:rw
     depends_on:
-      - postgres
+      - db
     env_file:
       - .env
 
