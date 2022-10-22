@@ -34,3 +34,21 @@ class HomeFinderView(viewsets.ModelViewSet):
             'ip': geodata['ip'],
             'country': geodata['country_name']
         })
+
+    # def create_home_profile(
+    #         *, message_inbox_id: int, user_id: int, protect_id: int, protect_answer_id: int
+    # ) -> Optional["Home"]:
+    #     protect_response_serializer = IntegrationProtectResponseSerializerR1(
+    #         data={
+    #             "user": user_id,
+    #             "protect": protect_id,
+    #             "protect_question_answer": protect_answer_id,
+    #         }
+    #     )
+    #     if not protect_response_serializer.is_valid():
+    #         logger.error(
+    #             f"Some errors occurred creating the protect response for the "
+    #             f"ProtectMessageInbox id: {message_inbox_id}. {protect_response_serializer.errors}"
+    #         )
+    #         return None
+    #     return protect_response_serializer.save()

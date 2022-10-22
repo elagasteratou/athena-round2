@@ -29,6 +29,7 @@ DATABASES = {
 # Application definition
 INSTALLED_APPS = [
     # Django stuff
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -152,3 +153,31 @@ STATIC_URL = os.environ.get("STATIC_URL", "/static/")
 
 EPC_BASIC_KEY = config("EPC_BASIC_KEY", default="")
 EPC_APP_KEY = config("EPC_APP_KEY", default="")
+
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
