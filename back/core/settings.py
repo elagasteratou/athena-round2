@@ -1,5 +1,6 @@
 import os
 
+from decouple import config
 from django.core.management.utils import get_random_secret_key
 
 # Env vars come through as ints 1 == True, all else False
@@ -148,3 +149,6 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = os.environ.get("STATIC_URL", "/static/")
+
+EPC_BASIC_KEY = config("EPC_BASIC_KEY", default="")
+EPC_APP_KEY = config("EPC_APP_KEY", default="")
