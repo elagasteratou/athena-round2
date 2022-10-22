@@ -2451,7 +2451,6 @@ export const fakeData ={
 }
 
 export const useGetData = (url) => {
-  return 
   // const [response, setResponse] = useState(null);
   // const [error, setError] = useState('');
   // const [loading, setloading] = useState(true);

@@ -8,17 +8,19 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import './App.css';
 import MenuItem from '@mui/material/MenuItem';
-import Welcome from './pages/Welcome';
+import RetroFitting from './pages/RetroFitting';
+import ImpactfulFixes from './pages/ImpactfulFixes';
 import RatingResult from './pages/RatingResult';
 import OurDiv from './components/OurDiv';
+import TableImpactfulFixes from './pages/TableImpactfulFixes';
 import { fakeData } from './Hooks/useGetData';
 
 const div = {
-  backgroundColor: 'lightBlue',
+  backgroundColor: 'white',
   padding: '10px',
-  fontFamily: 'Arial',
-  height: '650px',
+  fontFamily: 'Inter',
   border: '2px solid red',
+  height: '100vh',
 };
 
 function App() {
@@ -26,9 +28,16 @@ function App() {
   const [text, setText] = useState();
   const [postCode, setPostcode] = useState(false);
   const [address, setAddress] = useState();
-  // const [data, setData] = useState({
-  // findout what we are getting
-  // });
+
+  const [data, setData] = useState({
+    EPCcurrent: 0,
+    EPCpotential: 0,
+    heatingPotential: 0,
+    heatingCurrent: 0,
+    lightingCostPotential: 0,
+    lightingCostCurrent: 0,
+    windoeEnvEff: 0,
+  });
   const [multiAddress, setMultiAddress] = useState();
   console.log('WAG1 FAM', fakeData['rows']);
   const onImageChange = (e) => setImage(e.target.files);
@@ -43,17 +52,29 @@ function App() {
     // getRatingImage()
   };
   const handleChange = (e) => {
-    console.log('get url here');
+    let myadd = e.target.value;
+    let theData = Object.values(fakeData['rows']).filter(
+      (item) => item['address'] === myadd
+    )[0];
+    setData({
+      EPCcurrent: theData['current-energy-rating'],
+      EPCpotential: theData['potential-energy-rating'],
+      heatingPotential: theData['heating-cost-potential'],
+      heatingCurrent: theData['heating-cost-current'],
+      lightingCostPotential: theData['lighting-cost-potential'],
+      lightingCostCurrent: theData['lighting-cost-current'],
+      windoeEnvEff: theData['windows-env-eff'],
+    });
+    //  SEND TO JESSIe
+    console.log('get url here', e.target.value);
   };
-
+  console.log('useState', data);
   const getRatingImage = (url) => {
+    // URL HOOK HERE
     console.log(url);
   };
   return (
     <div>
-      <div style={div}>
-        <Welcome />
-      </div>
       <div style={div}>
         <Box
           component="div"
@@ -134,7 +155,9 @@ function App() {
           </Box>
         </Box>
       </div>
-      <div style={div}>{/* <RatingResult /> */}</div>
+      <div style={div}>{data && <RatingResult data={data} />}</div>
+      <div style={div}><RetroFitting /></div>
+      <div style={div}><ImpactfulFixes /></div>
     </div>
   );
 }
