@@ -1,17 +1,14 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
-
-from home.views import (
-    HomeFinderView,
-)
-
+from .views import HomeFinderView
 app_name = "home"
 
-router = DefaultRouter()
-router.register(r"home", HomeFinderView, basename="r1")
-# router.register(
-#     r"insight-questions/r1", InsightQuestionViewSetR1, basename="questions-r1"
-# )
-#
-# router.register(r"insights/create/r1", InsightCreateViewSetR1, basename="create-r1")
-urlpatterns = router.urls
+
+# router.register(r"home", viewset=views.HomeFinderViewSet, basename="r1")
+# path('homesearch/<str:postcode>/', views.HomeFinderViewSet.search)
+
+# router.register(r'homesearch/<str:postcode>/', viewset=views.HomeFinderView.search)
+urlpatterns = [
+    path('homesearch/', HomeFinderView.as_view(), name='homesearch'),
+    path('homesearch/<str:postcode>/', HomeFinderView.as_view(), name='postcode')
+]

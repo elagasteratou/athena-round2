@@ -58,8 +58,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# Override the user model
-AUTH_USER_MODEL = "accounts.User"
 
 # Need to make this not die in CI
 ALLOWED_HOSTS = ["*"]
@@ -152,7 +150,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = os.environ.get("STATIC_URL", "/static/")
 
 EPC_BASIC_KEY = config("EPC_BASIC_KEY", default="")
-EPC_APP_KEY = config("EPC_APP_KEY", default="")
 
 CORS_ALLOWED_ORIGINS = [
     "https://example.com",

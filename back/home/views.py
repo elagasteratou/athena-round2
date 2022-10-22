@@ -1,39 +1,49 @@
+import os
+from django.http import HttpResponse
 from django import forms
 from django.conf import settings
 from django.shortcuts import render
 import requests
-from rest_framework import viewsets
+from rest_framework import viewsets, views
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
-class HomeFinderView(viewsets.ModelViewSet):
+class HomeFinderView(APIView):
     postcode = forms.CharField(max_length=100)
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
-    def search(self):
-        result = {}
-        postcode = self.cleaned_data['postcode']
-        endpoint = 'https://epc.opendatacommunities.org/api/v1/domestic/search/?{postcode}/'
-        url = endpoint.format(source_lang='en', postcode=postcode)
-        headers = {'authorization': settings.EPC_BASIC_KEY, 'accept': 'application/json'}
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:  # SUCCESS
-            result = response.json()
-            result['success'] = True
-            save_to_user(result)
-        else:
-            result['success'] = False
-            if response.status_code == 404:  # NOT FOUND
-                result['message'] = 'No entry found for "%s"' % word
-            else:
-                result['message'] = 'The Oxford API is not available at the moment. Please try again later.'
-        return result
+    def get(self, request, *args, **kwargs):
+        # key = os.environ.get("EPC_BASIC_KEY", default="")
+        # result = {}
+        # print(key)
+        # postcode = self.cleaned_data['postcode']
+        #
+        endpoint = 'https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}/'
+        # # url = endpoint.format(postcode=postcode)
+        headers = {'Authorization': 'Basic amVzc2llQGN5YnNhZmUuY29tOjllMzkyMmU2MmY1MzVlN2VjZmY2NGIwMTM4YWFkN2NmZmI2Y2Q0Zjg=', 'Accept': 'application/json'}
+        # print(headers)
+        # # response = requests.get(url, headers=headers).json()
+        # # response =
+        r = requests.get(endpoint, headers=headers)
+        print(r.headers)
+        content = {
+            'user': str(request.user),  # `django.contrib.auth.User` instance.
+            'auth': str(request.auth),  # None
+        }
+        return Response(content)
 
-    def select_home(request):
-        response = requests.get('https://epc.opendatacommunities.org/api/v1/domestic/search')
-        results = response.json()
-        return render(request, 'core/home.html', {
-            'ip': geodata['ip'],
-            'country': geodata['country_name']
-        })
+
+    # def select_home(request):
+    #     response = requests.get('https://epc.opendatacommunities.org/api/v1/domestic/search')
+    #     results = response.json()
+    #     return render(request, 'core/home.html', {
+    #         'ip': geodata['ip'],
+    #         'country': geodata['country_name']
+    #     })
 
     # def create_home_profile(
     #         *, message_inbox_id: int, user_id: int, protect_id: int, protect_answer_id: int
