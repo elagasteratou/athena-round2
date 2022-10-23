@@ -24,7 +24,7 @@ export default function TableImpactfulFixes({ data }) {
 
   useEffect(() => {
     if (data) {
-      console.log('we have data');
+
       setRows([
         createData(
           'Better lighting installation',

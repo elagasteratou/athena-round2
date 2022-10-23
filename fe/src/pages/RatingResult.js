@@ -42,7 +42,6 @@ const text = {
   display: 'block',
 };
 function RatingResult({ data }) {
-  console.log('what is a gwarn', data.EPCcurrent);
   return (
     <>
       <div>
