@@ -19,9 +19,9 @@ class HomeFinderView(APIView):
 
     # @api_view(["get"])
     def search(self, request, *args, **kwargs):
-        endpoint = 'https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}/'
+        endpoint = "https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}/"
         key = os.getenv("EPC_BASIC_KEY")
-        headers = {'Authorization': 'Basic ' + str(key)}
+        headers = {"Authorization": "Basic " + str(key)}
 
         response = requests.get(endpoint.format(postcode=request), headers=headers)
 

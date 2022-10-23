@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Home
 
+
 class IntegrationProtectResponseSerializerR1(serializers.ModelSerializer):
     answer = serializers.CharField(source="protect_question_answer_txt", read_only=True)
 
@@ -26,13 +27,10 @@ class IntegrationProtectResponseSerializerR1(serializers.ModelSerializer):
             "status",
         )
 
-
     def validate(self, attrs):
         attrs = super().validate(attrs)
         house = attrs["rows"]
         protect_question_answer = attrs["protect_question_answer"]
-
-
 
     def to_internal_value(self, data):
         ret = super().to_internal_value(data)
