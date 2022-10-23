@@ -1,4 +1,5 @@
 import os
+
 import openai
 import requests
 from django.views import View

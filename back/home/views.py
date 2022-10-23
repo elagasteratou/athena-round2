@@ -1,14 +1,16 @@
-import os
 import json
-from django.http import HttpResponse
+import os
+
+import requests
 from django import forms
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render
-import requests
-from rest_framework import viewsets, views
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework import views, viewsets
+from rest_framework.authentication import (BasicAuthentication,
+                                           SessionAuthentication)
 from rest_framework.decorators import api_view
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
