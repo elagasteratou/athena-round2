@@ -11,16 +11,17 @@ import MenuItem from '@mui/material/MenuItem';
 import RetroFitting from './pages/RetroFitting';
 import ImpactfulFixes from './pages/ImpactfulFixes';
 import RatingResult from './pages/RatingResult';
-import OurDiv from './components/OurDiv';
-import TableImpactfulFixes from './pages/TableImpactfulFixes';
-import { fakeData } from './Hooks/useGetData';
+import { fakeData, useGetData } from './Hooks/useGetData';
 
 const div = {
   backgroundColor: 'white',
   padding: '10px',
   fontFamily: 'Inter',
   border: '2px solid red',
-  height: '100vh',
+  height: '667px',
+  scrollMargin: '10px',
+  scrollSnapAlign: 'start',
+  scrollSnapStop: 'normal',
 };
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
   const [text, setText] = useState();
   const [postCode, setPostcode] = useState(false);
   const [address, setAddress] = useState();
-
+  // const {response} = useGetData()
   const [data, setData] = useState({
     EPCcurrent: 0,
     EPCpotential: 0,
@@ -42,7 +43,7 @@ function App() {
   console.log('WAG1 FAM', fakeData['rows']);
   const onImageChange = (e) => setImage(e.target.files);
   const onTextChange = (e) => setText(e.target.value);
-
+  const { response } = useGetData('http://localhost:8000/api/SampleTodos/');
   const handleSubmit = (event, text) => {
     event.preventDefault();
     setPostcode(text);
@@ -74,12 +75,12 @@ function App() {
     console.log(url);
   };
   return (
-    <div>
+    <div style={{ scrollSnapType: 'x mandatory' }}>
       <div style={div}>
         <Box
           component="div"
           sx={{
-            p: 8,
+            p: 5,
             alignItems: 'center',
             justifySelf: 'center',
             height: '100%',
@@ -156,8 +157,11 @@ function App() {
         </Box>
       </div>
       <div style={div}>{data && <RatingResult data={data} />}</div>
-      <div style={div}><RetroFitting /></div>
-      <div style={div}><ImpactfulFixes /></div>
+      <div style={div}>
+        <RetroFitting />
+      </div>
+      <div style={div}>{data && <ImpactfulFixes data={data} />}</div>
+      {/* <div>{console.log('real', response)}</div> */}
     </div>
   );
 }

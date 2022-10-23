@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,11 +12,6 @@ function createData(change, efficiencyRating) {
   return { change, efficiencyRating };
 }
 
-const rows = [
-  createData('Better wall insulation', 'Very poor'),
-  createData('Double glazing windows', 'Very poor'),
-];
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#D9D9D9',
@@ -24,7 +19,27 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-export default function TableImpactfulFixes() {
+export default function TableImpactfulFixes({ data }) {
+  const [rows, setRows] = useState([createData('', ''), createData('', '')]);
+
+  useEffect(() => {
+    if (data) {
+      console.log('we have data');
+      setRows([
+        createData(
+          'Better lighting installation',
+          data?.lightingCostPotential < data?.lightingCostCurrent
+            ? 'Very poor'
+            : 'Good'
+        ),
+        createData(
+          'Better window installation',
+          data?.windoeEnvEff < 2 ? 'Very poor' : 'Good'
+        ),
+      ]);
+    }
+  }, [data]);
+
   return (
     <TableContainer component={Paper} sx={{ width: 350 }}>
       <Table sx={{ width: 350 }} aria-label="simple table">

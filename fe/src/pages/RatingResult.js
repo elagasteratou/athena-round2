@@ -34,32 +34,47 @@ const textStyles = {
   marginRight: '40px',
   fontSize: '45px',
 };
+const text = {
+  color: 'black',
+  marginLeft: '25px',
+  marginRight: '40px',
+  fontSize: '15px',
+  display: 'block',
+};
 function RatingResult({ data }) {
   console.log('what is a gwarn', data.EPCcurrent);
   return (
     <>
       <div>
-        <h1>Your household's energy stats</h1>
+        <h2>Your household's energy stats</h2>
         <div style={first}>
           <span style={textStyles}>{data?.['EPCcurrent']}</span>
         </div>
       </div>
       <div>
-        <h2>Your potential ECP</h2>
+        <h3>Your potential ECP</h3>
         <div style={second}>
           <span style={textStyles}>{data?.['EPCpotential']}</span>
         </div>
-        <h2>Your ECP rating</h2>
+        <h3>Your ECP rating</h3>
       </div>
       <div>
-        <h3>
+        <h4>
           EPC ratings are ranked from A being most energy efficent to G being
           the least
-        </h3>
-        <div style={third}></div>
-        <h3>You can save</h3>
-        <h3>£121</h3>
-        <h3>through retrofitting</h3>
+        </h4>
+        <div style={third}>
+          <div style={text}>
+            <h3>
+              You can save
+              <br />
+              <strong>
+                £121 <br />
+              </strong>
+              through retrofitting
+            </h3>
+          </div>
+        </div>
       </div>
       <Button variant="contained">
         Let’s retrofit to bump up your rating!
