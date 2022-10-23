@@ -17,17 +17,21 @@ class HomeFinderView(APIView):
     authentication_classes = [BasicAuthentication]
     permission_classes = [AllowAny]
 
-    @api_view(["get"])
+    # @api_view(["get"])
     def search(self, request, *args, **kwargs):
         endpoint = 'https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}/'
-        # headers = {'Authorization': 'Basic amVzc2llQGN5YnNhZmUuY29tOjllMzkyMmU2MmY1MzVlN2VjZmY2NGIwMTM4YWFkN2NmZmI2Y2Q0Zjg=', 'Accept': 'application/json'}
-        # print(headers)
-        # # response = requests.get(url, headers=headers).json()
-        # # response =
-        # r = requests.get())
-        response = requests.get(endpoint.format(postcode=request))
+        key = os.getenv("EPC_BASIC_KEY")
+        headers = {'Authorization': 'Basic ' + str(key)}
+
+        response = requests.get(endpoint.format(postcode=request), headers=headers)
 
         return Response(response)
+
+    def get(self, request, *args, **kwargs):
+        """mock as a test, before configuring authentication for above search function"""
+        open("data.json", "r")
+        json = open("data.json", "r")
+        return Response(f"{json}")
 
     # def select_home
     # def select_home(request):
