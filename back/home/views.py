@@ -1,4 +1,5 @@
 import os
+import json
 from django.http import HttpResponse
 from django import forms
 from django.conf import settings
@@ -29,9 +30,11 @@ class HomeFinderView(APIView):
 
     def get(self, request, *args, **kwargs):
         """mock as a test, before configuring authentication for above search function"""
-        open("data.json", "r")
-        json = open("data.json", "r")
-        return Response(f"{json}")
+
+        json = (open("athena-round2/back/home/data.json"))
+        data = json.load(json)
+
+        return Response(data)
 
     # def select_home
     # def select_home(request):
