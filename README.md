@@ -1,4 +1,10 @@
-# Django/React template
+# Conscious Carbon Fit
+
+Docs for API's in use:
+Energy Performance of Buildings Data
+England and Wales: https://epc.opendatacommunities.org/docs/guidance
+
+OpenAI GPT-3 https://beta.openai.com/docs/introduction
 
 Testing
 -----
