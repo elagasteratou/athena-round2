@@ -6,37 +6,30 @@ from django.shortcuts import render
 import requests
 from rest_framework import viewsets, views
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
 class HomeFinderView(APIView):
     postcode = forms.CharField(max_length=100)
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [AllowAny]
 
-    def get(self, request, *args, **kwargs):
-        # key = os.environ.get("EPC_BASIC_KEY", default="")
-        # result = {}
-        # print(key)
-        # postcode = self.cleaned_data['postcode']
-        #
+    @api_view(["get"])
+    def search(self, request, *args, **kwargs):
         endpoint = 'https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}/'
-        # # url = endpoint.format(postcode=postcode)
-        headers = {'Authorization': 'Basic amVzc2llQGN5YnNhZmUuY29tOjllMzkyMmU2MmY1MzVlN2VjZmY2NGIwMTM4YWFkN2NmZmI2Y2Q0Zjg=', 'Accept': 'application/json'}
+        # headers = {'Authorization': 'Basic amVzc2llQGN5YnNhZmUuY29tOjllMzkyMmU2MmY1MzVlN2VjZmY2NGIwMTM4YWFkN2NmZmI2Y2Q0Zjg=', 'Accept': 'application/json'}
         # print(headers)
         # # response = requests.get(url, headers=headers).json()
         # # response =
-        r = requests.get(endpoint, headers=headers)
-        print(r.headers)
-        content = {
-            'user': str(request.user),  # `django.contrib.auth.User` instance.
-            'auth': str(request.auth),  # None
-        }
-        return Response(content)
+        # r = requests.get())
+        response = requests.get(endpoint.format(postcode=request))
 
+        return Response(response)
 
+    # def select_home
     # def select_home(request):
     #     response = requests.get('https://epc.opendatacommunities.org/api/v1/domestic/search')
     #     results = response.json()

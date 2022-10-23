@@ -10,5 +10,8 @@ app_name = "home"
 # router.register(r'homesearch/<str:postcode>/', viewset=views.HomeFinderView.search)
 urlpatterns = [
     path('homesearch/', HomeFinderView.as_view(), name='homesearch'),
-    path('homesearch/<str:postcode>/', HomeFinderView.as_view(), name='postcode')
+    path('homesearch/<str:postcode>/', HomeFinderView.as_view(), name='postcode'),
+    path('homesearch/cr43jx/', HomeFinderView.as_view(), name='mockpostcode'),
+    path('homesearch/cr43jx/', HomeFinderView.as_view(), name='mockpostcode'),
+
 ]
