@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "accounts",
     "home",
     "appliances",
+    "chat_bot",
 ]
 
 MIDDLEWARE = [

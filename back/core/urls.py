@@ -10,4 +10,5 @@ urlpatterns = [
     path("", include),
     path("api/auth/", include("dj_rest_auth.urls"), name="auth"),
     path("", include("home.urls"), name="home"),
+    path("", include("chat_bot.urls"), name="chat_bot"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -38,7 +38,6 @@ class HomeFinderView(APIView):
 
         return Response(data)
 
-    # def select_home
     # def select_home(request):
     #     response = requests.get('https://epc.opendatacommunities.org/api/v1/domestic/search')
     #     results = response.json()
