@@ -14,7 +14,7 @@ export default function Form(onSubmit) {
   const onImageChange = (e) => setImage(e.target.files);
   const onTextChange = (e) => setText(e.target.value);
   const handleSubmit = () => {
-    console.log('hi', text);
+
     navigate('/result');
   };
 

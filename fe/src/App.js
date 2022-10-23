@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
+import useScrollSnap from 'react-use-scroll-snap';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -17,7 +18,7 @@ const div = {
   backgroundColor: 'white',
   padding: '10px',
   fontFamily: 'Inter',
-  border: '2px solid red',
+  // border: '2px solid red',
   height: '667px',
   scrollMargin: '10px',
   scrollSnapAlign: 'start',
